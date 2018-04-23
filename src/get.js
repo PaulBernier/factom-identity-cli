@@ -15,7 +15,7 @@ async function getIdentityInformation(cli, rootChainId) {
     const coinbaseAddress = getCoinbaseAddress(rootChainId, rootEntries, identityKey1);
     const efficiency = getEfficiency(rootChainId, managementEntries, identityKey1);
 
-    return { coinbaseAddress: coinbaseAddress, efficiency: efficiency };
+    return { serverManagementSubchainId: serverManagementSubchainId.toString('hex'), coinbaseAddress, efficiency };
 }
 
 function getCoinbaseAddress(rootChainId, rootEntries, identityKey1) {
