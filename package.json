@@ -1,0 +1,19 @@
+{
+    "name": "factom-identity-cli",
+    "version": "0.0.1",
+    "description": "",
+    "main": "index.js",
+    "bin": {
+        "factom-identity-cli": "./bin/factom-identity-cli.js"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Paul Bernier",
+    "license": "MIT",
+    "dependencies": {
+        "commander": "2.15.1",
+        "elliptic": "6.4.0",
+        "factom": "0.1.2"
+    }
+}
