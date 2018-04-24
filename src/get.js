@@ -7,15 +7,21 @@ const VERSION_0 = Buffer.alloc(1);
 
 async function getIdentityInformation(cli, rootChainId) {
     const rootEntries = await getIdentityRootChainEntries(cli, rootChainId);
-    const identityKey1 = getIdentityKeys(rootEntries[0])[0];
+    const identityKeys = getIdentityKeys(rootEntries[0]);
 
     const serverManagementSubchainId = extractServerManagementSubchainId(rootEntries);
     const managementEntries = await getServerManagementSubchainEntries(cli, serverManagementSubchainId, rootChainId);
 
-    const coinbaseAddress = getCoinbaseAddress(rootChainId, rootEntries, identityKey1);
-    const efficiency = getEfficiency(rootChainId, managementEntries, identityKey1);
+    const coinbaseAddress = getCoinbaseAddress(rootChainId, rootEntries, identityKeys[0]);
+    const efficiency = getEfficiency(rootChainId, managementEntries, identityKeys[0]);
 
-    return { serverManagementSubchainId: serverManagementSubchainId.toString('hex'), coinbaseAddress, efficiency };
+    return {
+        rootChainId,
+        serverManagementSubchainId: serverManagementSubchainId.toString('hex'),
+        coinbaseAddress,
+        efficiency,
+        identityKeys: identityKeys.map(ik => ik.toString('hex'))
+    };
 }
 
 function getCoinbaseAddress(rootChainId, rootEntries, identityKey1) {
