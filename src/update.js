@@ -16,7 +16,7 @@ async function updateCoinbaseAddress(cli, rootChainId, fctAddress, sk1, ecPrivat
         throw new Error('Lowest level identity key (sk1) is not valid');
     }
     if (!isValidFctPublicAddress(fctAddress)) {
-        throw new Error(`Invalid public FCT address; ${fctAddress}`);
+        throw new Error(`Invalid public FCT address: ${fctAddress}`);
     }
     if (!isValidEcPrivateAddress(ecPrivateAddress)) {
         throw new Error(`Invalid private EC address ${ecPrivateAddress}`);
@@ -40,11 +40,11 @@ async function updateCoinbaseAddress(cli, rootChainId, fctAddress, sk1, ecPrivat
 }
 
 async function updateEfficiency(cli, rootChainId, efficiency, sk1, ecPrivateAddress) {
-    if (typeof efficiency !== 'number' || efficiency < 0 || efficiency > 100) {
-        throw new Error('Efficiency must be a number between 0 and 100');
-    }
     if (!isValidSk1(sk1)) {
         throw new Error('Lowest level identity key (sk1) is not valid');
+    }
+    if (typeof efficiency !== 'number' || efficiency < 0 || efficiency > 100) {
+        throw new Error('Efficiency must be a number between 0 and 100');
     }
     if (!isValidEcPrivateAddress(ecPrivateAddress)) {
         throw new Error(`Invalid private EC address ${ecPrivateAddress}`);
