@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const program = require('commander'),
     { getIdentityInformation } = require('../src/get'),
     { getConnectionInformation } = require('../src/util');
