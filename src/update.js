@@ -233,7 +233,7 @@ function isValidIdentityChainId(rootChainId) {
 
 function getTimestampBuffer() {
     const timestamp = Buffer.alloc(8);
-    timestamp.writeIntBE(parseInt(Date.now() / 1000), 0, 8);
+    timestamp.writeIntBE(parseInt(Date.now() / 1000), 2, 6);
     return timestamp;
 }
 
