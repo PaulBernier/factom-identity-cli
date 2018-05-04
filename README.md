@@ -8,22 +8,27 @@ sudo npm install -g factom-identity-cli
 
 ## Usage
 
+All the commands support the option `-s localhost:8088` that allows to specify the host and port of the factomd API endpoint.
+
 ### Get identity information
 
 ```bash
+# Parameter: <Identity root chain ID>
 $ factom-identity-cli get -s localhost:8088 888888b2e7c7c63655fa85e0b0c43b4b036a6bede51d38964426f122f61c5584
-```
-
-### Update efficiency
-
-```bash
-$ factom-identity-cli update-efficiency -s localhost:8088 888888b2e7c7c63655fa85e0b0c43b4b036a6bede51d38964426f122f61c5584 19.89 sk12J1qQCjTRtnJ15bmb1iSinEvtzgQMBi5szzV793LUJQib36pvz Es3ytEKt4R55M9juC4ks7EgxQSX8BpRnM4WADthFoq7j1WgbEEGW
 ```
 
 ### Update coinbase address
 
 ```bash
+# Parameters: <Identity root chain ID> <FCT public address> <SK1 private key> <Paying private EC address>
 $ factom-identity-cli update-coinbase-address -s localhost:8088 888888b2e7c7c63655fa85e0b0c43b4b036a6bede51d38964426f122f61c5584 FA24PAtyZWWVAPm95ZCVpwyY6RYHeCMTiZt2v4VQAY8aBXMUZyeF sk12J1qQCjTRtnJ15bmb1iSinEvtzgQMBi5szzV793LUJQib36pvz Es3ytEKt4R55M9juC4ks7EgxQSX8BpRnM4WADthFoq7j1WgbEEGW
+```
+
+### Update efficiency
+
+```bash
+# Parameters: <Identity root chain ID> <Efficiency> <SK1 private key> <Paying private EC address>
+$ factom-identity-cli update-efficiency -s localhost:8088 888888b2e7c7c63655fa85e0b0c43b4b036a6bede51d38964426f122f61c5584 19.89 sk12J1qQCjTRtnJ15bmb1iSinEvtzgQMBi5szzV793LUJQib36pvz Es3ytEKt4R55M9juC4ks7EgxQSX8BpRnM4WADthFoq7j1WgbEEGW
 ```
 
 ## Offline mode
