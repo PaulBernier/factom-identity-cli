@@ -28,7 +28,12 @@ function getCoinbaseAddress(rootChainId, rootEntries, identityKey1) {
     // TODO: use the timestamp of the message for ordering and not ordering of entries?
     for (const entry of rootEntries.reverse()) {
         if (isValidCoinbaseAddressRegistration(entry, rootChainId, identityKey1)) {
-            return keyToFctPublicAddress(entry.extIds[3]);
+            return {
+                registrationEntryHash: entry.hash().toString('hex'),
+                registrationTimestamp: entry.blockContext.entryTimestamp,
+                registrationDirectoryBlockHeight: entry.blockContext.directoryBlockHeight,
+                address: keyToFctPublicAddress(entry.extIds[3])
+            };
         }
     }
 }
@@ -38,7 +43,12 @@ function getEfficiency(rootChainId, managementEntries, identityKey1) {
     // TODO: use the timestamp of the message for ordering and not ordering of entries?
     for (const entry of managementEntries.reverse()) {
         if (isValidEfficiencyRegistration(entry, rootChainId, identityKey1)) {
-            return parseInt(entry.extIds[3].toString('hex'), 16) / 100;
+            return {
+                registrationEntryHash: entry.hash().toString('hex'),
+                registrationTimestamp: entry.blockContext.entryTimestamp,
+                registrationDirectoryBlockHeight: entry.blockContext.directoryBlockHeight,
+                efficiency: parseInt(entry.extIds[3].toString('hex'), 16) / 100
+            };
         }
     }
 }

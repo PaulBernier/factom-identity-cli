@@ -1,6 +1,6 @@
 {
     "name": "factom-identity-cli",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "description": "",
     "main": "src/factom-identity.js",
     "bin": {
@@ -14,6 +14,6 @@
     "dependencies": {
         "commander": "2.15.1",
         "elliptic": "6.4.0",
-        "factom": "0.1.6"
+        "factom": "0.1.9"
     }
 }
