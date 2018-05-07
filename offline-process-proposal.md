@@ -10,8 +10,10 @@ You will need 2 usb sticks ready:
 You will also need your Factom identity information handy:
 
 * Your identity root chain id
-* Your server management chain id
+* Your server management subchain id
 * Your secret level 1 identity key (starts with SK1)
+
+The value of the Server Management Subchain ID can be found by looking at the identity root chain id in a Factom explorer: it is the value of the 3rd external id of the entry whose 2nd external id is equal to 'Register Server Management'.
 
 ## Steps
 
