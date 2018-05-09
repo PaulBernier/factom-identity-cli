@@ -172,7 +172,7 @@ function getEfficiencyChangeEntry(rootChainId, serverManagementSubchainId, eff, 
     const chainId = Buffer.from(rootChainId, 'hex');
 
     let effHex = parseInt(eff * 100).toString('16');
-    effHex = '0'.repeat(effHex.length % 2) + effHex;
+    effHex = effHex.padStart(4, '0');
     const efficiency = Buffer.from(effHex, 'hex');
     const timestamp = getTimestampBuffer();
 
@@ -249,6 +249,8 @@ function extractSecretFromIdentityKey(sk) {
 module.exports = {
     updateCoinbaseAddress,
     updateEfficiency,
+    generateUpdateEfficiencyEntry,
+    generateUpdateCoinbaseAddressEntry,
     generateUpdateEfficiencyScript,
     generateUpdateCoinbaseAddressScript
 };
