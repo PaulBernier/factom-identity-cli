@@ -123,6 +123,7 @@ function isValidEfficiencyRegistration(entry, rootChainId, identityKey1) {
     if (!extIds[0].equals(VERSION_0) ||
         extIds[1].toString() !== 'Server Efficiency' ||
         extIds[2].toString('hex') !== rootChainId ||
+        extIds[3].length !== 2 ||
         !sha256d(extIds[5]).equals(identityKey1)) {
         return false;
     }
