@@ -12,8 +12,8 @@
     "author": "Paul Bernier",
     "license": "MIT",
     "dependencies": {
-        "commander": "2.15.1",
         "elliptic": "6.4.0",
-        "factom": "0.1.9"
+        "factom": "0.1.9",
+        "yargs": "^11.0.0"
     }
 }
