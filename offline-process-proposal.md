@@ -71,7 +71,7 @@ Those 2 commands will create 2 scripts if successful: `update-coinbase-address.s
 * Plugin the DATA stick.
 * Execute both bash scripts. They simply use `curl` command line that should be available on most unix based systems. The scripts will make the requests to Factom Inc. courtesy node. You can edit the scripts to choose another endpoint (localhost for instance).
 * Inspect the output of the scripts for success messages.
-* You can check in an explorer that your identity root chain and server management subchain have been updated.
+* You can check in an explorer that your identity root chain and server management subchain have been updated after 10 minutes (next block).
 
 ### 10. Format the BOOT stick
 
