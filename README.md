@@ -12,9 +12,18 @@ All the commands support the option `-s localhost:8088` that allows to specify t
 
 ### Get identity information
 
+#### Get current efficiency and coinbase address
+
 ```bash
 # Parameter: <Identity root chain ID>
 $ factom-identity-cli get -s localhost:8088 888888b2e7c7c63655fa85e0b0c43b4b036a6bede51d38964426f122f61c5584
+```
+
+#### Get history of efficiencies and coinbase addresses
+
+```bash
+# Parameter: <Identity root chain ID>
+$ factom-identity-cli get -s localhost:8088 --history 888888b2e7c7c63655fa85e0b0c43b4b036a6bede51d38964426f122f61c5584
 ```
 
 ### Update coinbase address

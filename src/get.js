@@ -12,8 +12,8 @@ async function getIdentityInformation(cli, rootChainId) {
     const serverManagementSubchainId = extractServerManagementSubchainId(rootEntries);
     const managementEntries = await getServerManagementSubchainEntries(cli, serverManagementSubchainId, rootChainId);
 
-    const coinbaseAddress = getCoinbaseAddress(rootChainId, rootEntries, identityKeys[0]);
-    const efficiency = getEfficiency(rootChainId, managementEntries, identityKeys[0]);
+    const coinbaseAddress = extractCoinbaseAddress(rootChainId, rootEntries, identityKeys[0]);
+    const efficiency = extractEfficiency(rootChainId, managementEntries, identityKeys[0]);
 
     return {
         rootChainId,
@@ -24,7 +24,26 @@ async function getIdentityInformation(cli, rootChainId) {
     };
 }
 
-function getCoinbaseAddress(rootChainId, rootEntries, identityKey1) {
+async function getIdentityInformationHistory(cli, rootChainId) {
+    const rootEntries = await getIdentityRootChainEntries(cli, rootChainId);
+    const identityKeys = getIdentityKeys(rootEntries[0]);
+
+    const serverManagementSubchainId = extractServerManagementSubchainId(rootEntries);
+    const managementEntries = await getServerManagementSubchainEntries(cli, serverManagementSubchainId, rootChainId);
+
+    const coinbaseAddressHistory = extractCoinbaseAddressHistory(rootChainId, rootEntries, identityKeys[0]);
+    const efficiencyHistory = extractEfficiencyHistory(rootChainId, managementEntries, identityKeys[0]);
+
+    return {
+        rootChainId,
+        serverManagementSubchainId: serverManagementSubchainId.toString('hex'),
+        coinbaseAddressHistory,
+        efficiencyHistory,
+        identityKeys: identityKeys.map(ik => ik.toString('hex'))
+    };
+}
+
+function extractCoinbaseAddress(rootChainId, rootEntries, identityKey1) {
     // TODO: use the timestamp of the message for ordering and not ordering of entries?
     for (const entry of rootEntries.reverse()) {
         if (isValidCoinbaseAddressRegistration(entry, rootChainId, identityKey1)) {
@@ -38,7 +57,19 @@ function getCoinbaseAddress(rootChainId, rootEntries, identityKey1) {
     }
 }
 
-function getEfficiency(rootChainId, managementEntries, identityKey1) {
+function extractCoinbaseAddressHistory(rootChainId, rootEntries, identityKey1) {
+
+    return rootEntries.reverse()
+        .filter(e => isValidCoinbaseAddressRegistration(e, rootChainId, identityKey1))
+        .map(e => ({
+            registrationEntryHash: e.hash().toString('hex'),
+            registrationTimestamp: e.blockContext.entryTimestamp,
+            registrationDirectoryBlockHeight: e.blockContext.directoryBlockHeight,
+            address: keyToFctPublicAddress(e.extIds[3])
+        }));
+}
+
+function extractEfficiency(rootChainId, managementEntries, identityKey1) {
 
     // TODO: use the timestamp of the message for ordering and not ordering of entries?
     for (const entry of managementEntries.reverse()) {
@@ -51,6 +82,18 @@ function getEfficiency(rootChainId, managementEntries, identityKey1) {
             };
         }
     }
+}
+
+function extractEfficiencyHistory(rootChainId, managementEntries, identityKey1) {
+
+    return managementEntries.reverse()
+        .filter(e => isValidEfficiencyRegistration(e, rootChainId, identityKey1))
+        .map(e => ({
+            registrationEntryHash: e.hash().toString('hex'),
+            registrationTimestamp: e.blockContext.entryTimestamp,
+            registrationDirectoryBlockHeight: e.blockContext.directoryBlockHeight,
+            efficiency: parseInt(e.extIds[3].toString('hex'), 16) / 100
+        }));
 }
 
 async function getIdentityRootChainEntries(cli, rootChainId) {
@@ -170,6 +213,7 @@ function keyToFctPublicAddress(key) {
 
 module.exports = {
     getIdentityInformation,
+    getIdentityInformationHistory,
     getIdentityRootChainEntries,
     getServerManagementSubchainEntries,
     getIdentityKeys,
