@@ -63,3 +63,9 @@ Value of the *Server Management Subchain ID* can be found by looking at the iden
 
 You are strongly encouraged to verify the content of the scripts. You can then copy those scripts to a machine connected to the Internet and execute them (they only require curl command to be installed). They do not contain any reference to your secret SK1 key.
 
+## Run in Docker container
+```
+docker build -t factom-identity-cli github.com/PaulBernier/factom-identity-cli
+
+docker run -it --rm factom-identity-cli ......
+```
