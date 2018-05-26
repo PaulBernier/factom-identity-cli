@@ -56,7 +56,7 @@ You are strongly encouraged to verify the content of the scripts. You can then c
 
 ## Run in Docker container
 ```
-sudo docker build -t factom-identity-cli https://github.com/PaulBernier/factom-identity-cli
+docker build -t factom-identity-cli github.com/PaulBernier/factom-identity-cli
 
-sudo docker run -it --rm factom-identity-cli ......
+docker run -it --rm factom-identity-cli ......
 ```
