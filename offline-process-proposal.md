@@ -63,6 +63,8 @@ $ node bin/factom-identity-cli update-efficiency --offline -s courtesy-node.fact
 
 Those 2 commands will create 2 scripts if successful: `update-coinbase-address.sh` and `update-efficiency.sh`. You are invited to audit the content of those scripts. Copy those 2 scripts to your DATA stick.
 
+**Important: the scripts generated contain timestamped data which means they have a limited time of validity. You must execute the scripts within 1 hour of their creation to be certain that the entries contained in them will be accepted by the network.**
+
 ### 8. Shutdown the Ubuntu session
 
 ### 9. Execute the scripts to update efficiency and coinbase address

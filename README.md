@@ -44,6 +44,8 @@ $ factom-identity-cli update-efficiency -s localhost:8088 888888b2e7c7c63655fa85
 
 You can use this tool to generate offline a bash script that can later be executed on a machine connected to the Internet. The use is mainly intended for Authority Servers operators who require maximum security. Your offline machine will need Node.js installed and this tool with all its dependencies available.
 
+**Important: the scripts generated contain timestamped data which means they have a limited time of validity. You must execute the scripts within 1 hour of their creation to be certain that the entries contained in them will be accepted by the network.**
+
 To generate a script to update the coinbase address:
 ```bash
 # Parameters: <Identity root chain ID> <FCT public address> <SK1 private key> <Paying private EC address>
