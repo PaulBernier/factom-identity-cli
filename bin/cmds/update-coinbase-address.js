@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 
-const { FactomIdentityManager } = require('factom-identity-lib'), { generateCoinbaseAddressUpdateScript } = require('../../src/generate-script'), { getConnectionInformation } = require('../../src/util');
+const colors = require('colors'),
+    { FactomIdentityManager } = require('factom-identity-lib'),
+    { generateCoinbaseAddressUpdateScript } = require('../../src/generate-script'),
+    { getConnectionInformation } = require('../../src/util');
 
 exports.command = 'update-coinbase-address <rchainid> <fctaddress> <sk1> <secaddress>';
 exports.describe = 'Update coinbase address or generate a script to update coinbase address.';
@@ -29,10 +32,13 @@ exports.handler = function(argv) {
     const manager = new FactomIdentityManager(factomdInformation);
 
     if (argv.offline) {
-        console.log(`Generating script to update coinbase address of Identity [${argv.rchainid}] with [${argv.fctaddress}]...`);
-        generateCoinbaseAddressUpdateScript(argv.rchainid, argv.fctaddress, argv.sk1, argv.secaddress, factomdInformation);
-        console.log('Script to update coinbase address generated. Execute "update-coinbase-address.sh" script on a machine with curl command and an Internet connection.');
-
+        try {
+            console.log(`Generating script to update coinbase address of Identity [${argv.rchainid}] with [${argv.fctaddress}]...`);
+            generateCoinbaseAddressUpdateScript(argv.rchainid, argv.fctaddress, argv.sk1, argv.secaddress, factomdInformation);
+            console.log('Script to update coinbase address generated. Execute "update-coinbase-address.sh" script on a machine with curl command and an Internet connection.');
+        } catch (e) {
+            console.error(colors.red(`Error: ${e.message}`));
+        }
     } else {
 
         console.log(`Updating coinbase address of Identity [${argv.rchainid}] with address [${argv.fctaddress}]...`);
@@ -40,7 +46,7 @@ exports.handler = function(argv) {
             .then(function(data) {
                 console.log(`Coinbase address successfully updated. Please wait for the next block to see the effect. Entry hash of the update: ${data.entryHash}`);
             })
-            .catch(console.error);
+            .catch(e => console.error(colors.red(`Error: ${e.message}`)));
 
     }
 };

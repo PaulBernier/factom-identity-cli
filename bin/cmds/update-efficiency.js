@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 
-const { FactomIdentityManager } = require('factom-identity-lib'), { generateEfficiencyUpdateScript } = require('../../src/generate-script'), { getConnectionInformation } = require('../../src/util');
+const colors = require('colors'),
+    { FactomIdentityManager } = require('factom-identity-lib'),
+    { generateEfficiencyUpdateScript } = require('../../src/generate-script'),
+    { getConnectionInformation } = require('../../src/util');
 
 exports.command = 'update-efficiency <rchainid> <efficiency> <sk1> <secaddress> [smchainid]';
 exports.describe = 'Update efficiency or generate a script to update efficiency.';
@@ -32,19 +35,23 @@ exports.handler = function(argv) {
     const manager = new FactomIdentityManager(factomdInformation);
 
     if (argv.offline) {
-        if (!argv.smchainid) {
-            throw new Error('Server Management Subchain Id needs to be specified as a 5th argument in offline mode');
-        }
-        console.log(`Generating script to update efficiency of Identity [${argv.rchainid}] with efficiency [${argv.efficiency}]...`);
-        generateEfficiencyUpdateScript(argv.rchainid, argv.smchainid, argv.efficiency, argv.sk1, argv.secaddress, factomdInformation);
-        console.log('Script to update effiency generated. Execute "update-efficiency.sh" script on a machine with curl command and an Internet connection.');
+        try {
+            if (!argv.smchainid) {
+                throw new Error('Server Management Subchain Id needs to be specified as a 5th argument in offline mode');
+            }
 
+            console.log(`Generating script to update efficiency of Identity [${argv.rchainid}] with efficiency [${argv.efficiency}]...`);
+            generateEfficiencyUpdateScript(argv.rchainid, argv.smchainid, argv.efficiency, argv.sk1, argv.secaddress, factomdInformation);
+            console.log('Script to update effiency generated. Execute "update-efficiency.sh" script on a machine with curl command and an Internet connection.');
+        } catch (e) {
+            console.error(colors.red(`Error: ${e.message}`));
+        }
     } else {
         console.log(`Updating efficiency of Identity [${argv.rchainid}] with efficiency [${argv.efficiency}]...`);
         manager.updateEfficiency(argv.rchainid, argv.efficiency, argv.sk1, argv.secaddress)
             .then(function(data) {
                 console.log(`Efficiency successfully updated. Please wait for the next block to see the effect. Entry hash of the update: ${data.entryHash}`);
             })
-            .catch(console.error);
+            .catch(e => console.error(colors.red(`Error: ${e.message}`)));
     }
 };

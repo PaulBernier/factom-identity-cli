@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
-const { FactomIdentityManager } = require('factom-identity-lib'), { getConnectionInformation } = require('../../src/util');
+const colors = require('colors'),
+    { FactomIdentityManager } = require('factom-identity-lib'),
+    { getConnectionInformation } = require('../../src/util');
 
 exports.command = 'get <rchainid>';
 exports.describe = 'Get identity information.';
@@ -28,11 +30,11 @@ exports.handler = function(argv) {
         console.log(`Retrieving historical information of identity [${argv.rchainid}]...`);
         manager.getIdentityInformationHistory(argv.rchainid)
             .then(console.log)
-            .catch(console.error);
+            .catch(e => console.error(colors.red(`Error: ${e.message}`)));
     } else {
         console.log(`Retrieving information of identity [${argv.rchainid}]...`);
         manager.getIdentityInformation(argv.rchainid)
             .then(console.log)
-            .catch(console.error);
+            .catch(e => console.error(colors.red(`Error: ${e.message}`)));
     }
 };
