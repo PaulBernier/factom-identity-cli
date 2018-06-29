@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { updateCoinbaseAddress, generateUpdateCoinbaseAddressScript } = require('../../src/update'), { getConnectionInformation } = require('../../src/util');
+const { FactomIdentityManager } = require('factom-identity-lib'), { generateCoinbaseAddressUpdateScript } = require('../../src/generate-script'), { getConnectionInformation } = require('../../src/util');
 
 exports.command = 'update-coinbase-address <rchainid> <fctaddress> <sk1> <secaddress>';
 exports.describe = 'Update coinbase address or generate a script to update coinbase address.';
@@ -26,18 +26,17 @@ exports.builder = function(yargs) {
 
 exports.handler = function(argv) {
     const factomdInformation = getConnectionInformation(argv.socket, 8088);
-    const { FactomCli } = require('factom');
-    const cli = new FactomCli(factomdInformation);
+    const manager = new FactomIdentityManager(factomdInformation);
 
     if (argv.offline) {
         console.log(`Generating script to update coinbase address of Identity [${argv.rchainid}] with [${argv.fctaddress}]...`);
-        generateUpdateCoinbaseAddressScript(argv.rchainid, argv.fctaddress, argv.sk1, argv.secaddress, factomdInformation);
+        generateCoinbaseAddressUpdateScript(argv.rchainid, argv.fctaddress, argv.sk1, argv.secaddress, factomdInformation);
         console.log('Script to update coinbase address generated. Execute "update-coinbase-address.sh" script on a machine with curl command and an Internet connection.');
 
     } else {
 
         console.log(`Updating coinbase address of Identity [${argv.rchainid}] with address [${argv.fctaddress}]...`);
-        updateCoinbaseAddress(cli, argv.rchainid, argv.fctaddress, argv.sk1, argv.secaddress)
+        manager.updateCoinbaseAddress(argv.rchainid, argv.fctaddress, argv.sk1, argv.secaddress)
             .then(function(data) {
                 console.log(`Coinbase address successfully updated. Please wait for the next block to see the effect. Entry hash of the update: ${data.entryHash}`);
             })

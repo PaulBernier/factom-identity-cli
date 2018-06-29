@@ -1,15 +1,3 @@
-const crypto = require('crypto');
-
-function sha256(data) {
-    const hash = crypto.createHash('sha256');
-    hash.update(data);
-    return hash.digest();
-}
-
-function sha256d(data) {
-    return sha256(sha256(data));
-}
-
 function getConnectionInformation(socket, defaultPort) {
     let host = 'localhost',
         port = defaultPort;
@@ -26,6 +14,5 @@ function getConnectionInformation(socket, defaultPort) {
 }
 
 module.exports = {
-    getConnectionInformation,
-    sha256d
+    getConnectionInformation
 };

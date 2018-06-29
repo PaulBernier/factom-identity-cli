@@ -1,8 +1,7 @@
 {
     "name": "factom-identity-cli",
-    "version": "0.1.1",
-    "description": "",
-    "main": "src/factom-identity.js",
+    "version": "0.1.2",
+    "description": "Factom identity command line tool",
     "bin": {
         "factom-identity-cli": "./bin/factom-identity-cli.js"
     },
@@ -13,7 +12,8 @@
     "license": "MIT",
     "dependencies": {
         "elliptic": "6.4.0",
-        "factom": "0.2.0",
+        "factom": "0.2.3",
+        "factom-identity-lib": "^0.1.2",
         "yargs": "^11.0.0"
     }
 }
