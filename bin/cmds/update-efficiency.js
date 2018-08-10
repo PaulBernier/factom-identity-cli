@@ -42,7 +42,7 @@ exports.handler = function(argv) {
 
             console.log(`Generating script to update efficiency of Identity [${argv.rchainid}] with efficiency [${argv.efficiency}]...`);
             generateUpdateEfficiencyScript(argv.rchainid, argv.smchainid, argv.efficiency, argv.sk1, argv.secaddress, factomdInformation);
-            console.log('Script to update effiency generated. Execute "update-efficiency.sh" script on a machine with curl command and an Internet connection.');
+            console.log(colors.green('Script to update effiency generated. Execute "update-efficiency.sh" script on a machine with curl command and an Internet connection.'));
         } catch (e) {
             console.error(colors.red(`Error: ${e.message}`));
         }
@@ -50,7 +50,7 @@ exports.handler = function(argv) {
         console.log(`Updating efficiency of Identity [${argv.rchainid}] with efficiency [${argv.efficiency}]...`);
         manager.updateEfficiency(argv.rchainid, argv.efficiency, argv.sk1, argv.secaddress)
             .then(function(data) {
-                console.log(`Efficiency successfully updated. Please wait for the next block to see the effect. Entry hash of the update: ${data.entryHash}`);
+                console.log(colors.green(`Efficiency successfully updated. Please wait for the next block to see the effect. Entry hash of the update: ${data.entryHash}`));
             })
             .catch(e => console.error(colors.red(`Error: ${e.message}`)));
     }

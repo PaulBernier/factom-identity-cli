@@ -45,7 +45,7 @@ exports.handler = function(argv) {
 
             console.log(`Generating script to add a cancel coinbase message for height ${argv.height} and index ${argv.index} to Identity [${argv.rchainid}]...`);
             generateAddCoinbaseCancelScript(argv.rchainid, argv.smchainid, argv.height, argv.index, argv.sk1, argv.secaddress, factomdInformation);
-            console.log('Script to add coinbase cancel message generated. Execute "add-coinbase-cancel.sh" script on a machine with curl command and an Internet connection.');
+            console.log(colors.green('Script to add coinbase cancel message generated. Execute "add-coinbase-cancel.sh" script on a machine with curl command and an Internet connection.'));
         } catch (e) {
             console.error(colors.red(`Error: ${e.message}`));
         }
@@ -53,7 +53,7 @@ exports.handler = function(argv) {
         console.log(`Adding coinbase cancel message for height ${argv.height} and index ${argv.index} to Identity [${argv.rchainid}]...`);
         manager.addCoinbaseCancel(argv.rchainid, argv.height, argv.index, argv.sk1, argv.secaddress)
             .then(function(data) {
-                console.log(`Coinbase cancel message successfully added. Please wait for the next block to see the effect. Entry hash of the message: ${data.entryHash}`);
+                console.log(colors.green(`Coinbase cancel message successfully added. Please wait for the next block to see the effect. Entry hash of the message: ${data.entryHash}`));
             })
             .catch(e => console.error(colors.red(`Error: ${e.message}`)));
     }

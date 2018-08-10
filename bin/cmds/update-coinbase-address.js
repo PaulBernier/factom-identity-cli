@@ -35,7 +35,7 @@ exports.handler = function(argv) {
         try {
             console.log(`Generating script to update coinbase address of Identity [${argv.rchainid}] with [${argv.fctaddress}]...`);
             generateUpdateCoinbaseAddressScript(argv.rchainid, argv.fctaddress, argv.sk1, argv.secaddress, factomdInformation);
-            console.log('Script to update coinbase address generated. Execute "update-coinbase-address.sh" script on a machine with curl command and an Internet connection.');
+            console.log(colors.green('Script to update coinbase address generated. Execute "update-coinbase-address.sh" script on a machine with curl command and an Internet connection.'));
         } catch (e) {
             console.error(colors.red(`Error: ${e.message}`));
         }
@@ -44,7 +44,7 @@ exports.handler = function(argv) {
         console.log(`Updating coinbase address of Identity [${argv.rchainid}] with address [${argv.fctaddress}]...`);
         manager.updateCoinbaseAddress(argv.rchainid, argv.fctaddress, argv.sk1, argv.secaddress)
             .then(function(data) {
-                console.log(`Coinbase address successfully updated. Please wait for the next block to see the effect. Entry hash of the update: ${data.entryHash}`);
+                console.log(colors.green(`Coinbase address successfully updated. Please wait for the next block to see the effect. Entry hash of the update: ${data.entryHash}`));
             })
             .catch(e => console.error(colors.red(`Error: ${e.message}`)));
 
