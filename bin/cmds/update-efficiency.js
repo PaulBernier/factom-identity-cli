@@ -2,7 +2,7 @@
 
 const colors = require('colors'),
     { FactomIdentityManager } = require('factom-identity-lib'),
-    { generateEfficiencyUpdateScript } = require('../../src/generate-script'),
+    { generateUpdateEfficiencyScript } = require('../../src/generate-script'),
     { getConnectionInformation } = require('../../src/util');
 
 exports.command = 'update-efficiency <rchainid> <efficiency> <sk1> <secaddress> [smchainid]';
@@ -41,7 +41,7 @@ exports.handler = function(argv) {
             }
 
             console.log(`Generating script to update efficiency of Identity [${argv.rchainid}] with efficiency [${argv.efficiency}]...`);
-            generateEfficiencyUpdateScript(argv.rchainid, argv.smchainid, argv.efficiency, argv.sk1, argv.secaddress, factomdInformation);
+            generateUpdateEfficiencyScript(argv.rchainid, argv.smchainid, argv.efficiency, argv.sk1, argv.secaddress, factomdInformation);
             console.log('Script to update effiency generated. Execute "update-efficiency.sh" script on a machine with curl command and an Internet connection.');
         } catch (e) {
             console.error(colors.red(`Error: ${e.message}`));

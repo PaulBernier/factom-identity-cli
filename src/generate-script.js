@@ -3,7 +3,7 @@ const { Entry, isValidEcPrivateAddress, composeEntry } = require('factom');
 const { generateCoinbaseAddressUpdateEntry, generateEfficiencyUpdateEntry, generateCoinbaseCancelEntry } = require('factom-identity-lib');
 
 
-function generateEfficiencyUpdateScript(rootChainId, serverManagementSubchainId, efficiency, sk1, ecPrivateAddress, factomdInformation) {
+function generateUpdateEfficiencyScript(rootChainId, serverManagementSubchainId, efficiency, sk1, ecPrivateAddress, factomdInformation) {
     if (!isValidEcPrivateAddress(ecPrivateAddress)) {
         throw new Error(`Invalid private EC address ${ecPrivateAddress}`);
     }
@@ -14,7 +14,7 @@ function generateEfficiencyUpdateScript(rootChainId, serverManagementSubchainId,
     fs.writeFileSync('update-efficiency.sh', script);
 }
 
-function generateCoinbaseAddressUpdateScript(rootChainId, fctAddress, sk1, ecPrivateAddress, factomdInformation) {
+function generateUpdateCoinbaseAddressScript(rootChainId, fctAddress, sk1, ecPrivateAddress, factomdInformation) {
     if (!isValidEcPrivateAddress(ecPrivateAddress)) {
         throw new Error(`Invalid private EC address ${ecPrivateAddress}`);
     }
@@ -55,7 +55,7 @@ function generateScript(message, commit, reveal, factomdInformation) {
 }
 
 module.exports = {
-    generateEfficiencyUpdateScript,
-    generateCoinbaseAddressUpdateScript,
+    generateUpdateEfficiencyScript,
+    generateUpdateCoinbaseAddressScript,
     generateAddCoinbaseCancelScript
 };

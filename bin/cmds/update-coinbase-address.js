@@ -2,7 +2,7 @@
 
 const colors = require('colors'),
     { FactomIdentityManager } = require('factom-identity-lib'),
-    { generateCoinbaseAddressUpdateScript } = require('../../src/generate-script'),
+    { generateUpdateCoinbaseAddressScript } = require('../../src/generate-script'),
     { getConnectionInformation } = require('../../src/util');
 
 exports.command = 'update-coinbase-address <rchainid> <fctaddress> <sk1> <secaddress>';
@@ -34,7 +34,7 @@ exports.handler = function(argv) {
     if (argv.offline) {
         try {
             console.log(`Generating script to update coinbase address of Identity [${argv.rchainid}] with [${argv.fctaddress}]...`);
-            generateCoinbaseAddressUpdateScript(argv.rchainid, argv.fctaddress, argv.sk1, argv.secaddress, factomdInformation);
+            generateUpdateCoinbaseAddressScript(argv.rchainid, argv.fctaddress, argv.sk1, argv.secaddress, factomdInformation);
             console.log('Script to update coinbase address generated. Execute "update-coinbase-address.sh" script on a machine with curl command and an Internet connection.');
         } catch (e) {
             console.error(colors.red(`Error: ${e.message}`));
