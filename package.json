@@ -1,6 +1,6 @@
 {
     "name": "factom-identity-cli",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "description": "Factom identity command line tool",
     "bin": {
         "factom-identity-cli": "./bin/factom-identity-cli.js"
