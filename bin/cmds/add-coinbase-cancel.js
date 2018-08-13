@@ -3,7 +3,7 @@
 const colors = require('colors'),
     { FactomIdentityManager } = require('factom-identity-lib'),
     { generateAddCoinbaseCancelScript } = require('../../src/generate-script'),
-    { getConnectionInformation } = require('../../src/util');
+    { getConnectionInformation, printError } = require('../../src/util');
 
 exports.command = 'add-coinbase-cancel <rchainid> <height> <index> <sk1> <secaddress> [smchainid]';
 exports.describe = 'Add a coinbase cancel message to an identity.';
@@ -47,7 +47,7 @@ exports.handler = function(argv) {
             generateAddCoinbaseCancelScript(argv.rchainid, argv.smchainid, argv.height, argv.index, argv.sk1, argv.secaddress, factomdInformation);
             console.log(colors.green('Script to add coinbase cancel message generated. Execute "add-coinbase-cancel.sh" script on a machine with curl command and an Internet connection.'));
         } catch (e) {
-            console.error(colors.red(`Error: ${e.message}`));
+            printError(e);
         }
     } else {
         console.log(`Adding coinbase cancel message for height ${argv.height} and index ${argv.index} to Identity [${argv.rchainid}]...`);
@@ -55,6 +55,6 @@ exports.handler = function(argv) {
             .then(function(data) {
                 console.log(colors.green(`Coinbase cancel message successfully added. Please wait for the next block to see the effect. Entry hash of the message: ${data.entryHash}`));
             })
-            .catch(e => console.error(colors.red(`Error: ${e.message}`)));
+            .catch(printError);
     }
 };

@@ -1,13 +1,12 @@
 #!/usr/bin/env node
 
-const colors = require('colors'),
-    { FactomIdentityManager } = require('factom-identity-lib'),
-    { getConnectionInformation } = require('../../src/util');
+const { FactomIdentityManager } = require('factom-identity-lib'),
+    { getConnectionInformation, printError } = require('../../src/util');
 
 exports.command = 'get <rchainid>';
 exports.describe = 'Get identity information.';
 
-exports.builder = function(yargs) {
+exports.builder = function (yargs) {
     return yargs.option('socket', {
         alias: 's',
         type: 'string',
@@ -22,7 +21,7 @@ exports.builder = function(yargs) {
     });
 };
 
-exports.handler = function(argv) {
+exports.handler = function (argv) {
     const factomdInformation = getConnectionInformation(argv.socket, 8088);
     const manager = new FactomIdentityManager(factomdInformation);
 
@@ -30,11 +29,11 @@ exports.handler = function(argv) {
         console.log(`Retrieving historical information of identity [${argv.rchainid}]...`);
         manager.getIdentityInformationHistory(argv.rchainid)
             .then(console.log)
-            .catch(e => console.error(colors.red(`Error: ${e.message}`)));
+            .catch(printError);
     } else {
         console.log(`Retrieving information of identity [${argv.rchainid}]...`);
         manager.getIdentityInformation(argv.rchainid)
             .then(console.log)
-            .catch(e => console.error(colors.red(`Error: ${e.message}`)));
+            .catch(printError);
     }
 };
