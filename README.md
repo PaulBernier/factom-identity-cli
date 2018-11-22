@@ -51,7 +51,9 @@ $ factom-identity-cli add-coinbase-cancel -s localhost:8088 888888b2e7c7c63655fa
 
 You can use this tool to generate offline a bash script that can later be executed on a machine connected to the Internet (the scripts only require curl command to be installed). The use is mainly intended for Authority Servers operators who require maximum security. Your offline machine will need Node.js installed and this tool with all its dependencies available. You are strongly encouraged to audit the content of the generated scripts.
 
-**Important: the scripts generated contain timestamped data which means they have a limited time of validity. You must execute the scripts within 1 hour of their creation to be certain that the entries contained in them will be accepted by the network.**
+**Important: the scripts generated contain timestamped data. This has 2 consequences:**
+* The clock of the machine you are using to generate the scripts must be on time. It is not uncommon for the clock of an offline machine to not be synced so please verify and adjust it before generating the scripts. It only needs to be accurate to the minute.
+* The scripts have a limited time of validity. You must execute the scripts within 1 hour of their creation to be certain that the entries contained in them will be accepted by the network.
 
 ### To generate a script to update the coinbase address
 
