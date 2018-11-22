@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 
-const colors = require('colors'),
+const ora = require('ora'),
+    chalk = require('chalk'),
     { FactomIdentityManager } = require('factom-identity-lib'),
     { generateUpdateEfficiencyScript } = require('../../src/generate-script'),
-    { getConnectionInformation, printError } = require('../../src/util');
+    { getConnectionInformation } = require('../../src/util');
 
 exports.command = 'update-efficiency <rchainid> <efficiency> <sk1> <secaddress> [smchainid]';
 exports.describe = 'Update efficiency or generate a script to update efficiency.';
 
-exports.builder = function(yargs) {
+exports.builder = function (yargs) {
     return yargs.option('socket', {
         alias: 's',
         describe: 'IPAddress:port of factomd API.',
@@ -30,28 +31,42 @@ exports.builder = function(yargs) {
     });
 };
 
-exports.handler = function(argv) {
+exports.handler = async function (argv) {
     const factomdInformation = getConnectionInformation(argv.socket, 8088);
     const manager = new FactomIdentityManager(factomdInformation);
 
+    let spinner;
+    console.error('');
     if (argv.offline) {
-        try {
-            if (!argv.smchainid) {
-                throw new Error('Server Management Subchain Id needs to be specified as a 5th argument in offline mode');
-            }
-
-            console.log(`Generating script to update efficiency of Identity [${argv.rchainid}] with efficiency [${argv.efficiency}]...`);
-            generateUpdateEfficiencyScript(argv.rchainid, argv.smchainid, argv.efficiency, argv.sk1, argv.secaddress, factomdInformation);
-            console.log(colors.green('Script to update effiency generated. Execute "update-efficiency.sh" script on a machine with curl command and an Internet connection.'));
-        } catch (e) {
-            printError(e);
+        if (!argv.smchainid) {
+            return console.error(chalk.red.bold('Server Management Subchain Id needs to be specified as the last (5th) argument in offline mode'));
         }
+
+        try {
+            console.error(chalk.blue.bold('Remember to always verify that the clock of your computer is synced when using the offline mode (see README for the reasons).'));
+            spinner = ora(`Generating script to update Identity ${chalk.yellow.bold(argv.rchainid)} with an efficiency of ${chalk.yellow.bold(argv.efficiency)}...`).start();
+
+            const filename = generateUpdateEfficiencyScript(argv.rchainid, argv.smchainid, argv.efficiency, argv.sk1, argv.secaddress, factomdInformation);
+            spinner.succeed();
+            console.error(`Execute ${chalk.yellow.bold(filename)} script on a machine with curl command and an Internet connection.`);
+        } catch (e) {
+            const message = e instanceof Error ? e.message : e;
+            spinner.fail();
+            console.error(chalk.red.bold(message));
+        }
+
     } else {
-        console.log(`Updating efficiency of Identity [${argv.rchainid}] with efficiency [${argv.efficiency}]...`);
-        manager.updateEfficiency(argv.rchainid, argv.efficiency, argv.sk1, argv.secaddress)
-            .then(function(data) {
-                console.log(colors.green(`Efficiency successfully updated. Please wait for the next block to see the effect. Entry hash of the update: ${data.entryHash}`));
-            })
-            .catch(printError);
+        spinner = ora(`Updating Identity ${chalk.yellow.bold(argv.rchainid)} with an efficiency of ${chalk.yellow.bold(argv.efficiency)}...`).start();
+
+        try {
+            const data = await manager.updateEfficiency(argv.rchainid, argv.efficiency, argv.sk1, argv.secaddress);
+            spinner.succeed();
+            console.error(`Please wait for the next block to see the effect. Entry hash of the update: ${chalk.yellow.bold(data.entryHash)}.`);
+        } catch (e) {
+            const message = e instanceof Error ? e.message : e;
+            spinner.fail();
+            console.error(chalk.red.bold(message));
+        }
     }
+    console.error('');
 };

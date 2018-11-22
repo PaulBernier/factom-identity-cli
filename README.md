@@ -61,7 +61,7 @@ You can use this tool to generate offline a bash script that can later be execut
 # Parameters: <Identity root chain ID> <FCT public address> <SK1 private key> <Paying private EC address>
 $ node bin/factom-identity-cli update-coinbase-address --offline -s localhost:8088 8888889822cf1d5889aa8dc11ad210b67d582812152de568fabc5f8505989c0f FA3HZDE4MdXAthauFoA3aKYpx33U4fT2kAABmfwk7NBqyLT2zed5 sk12tdaziBoFyBHG56Ery3bPFFBDpy7Y3VymduGPfoj66cGhH4mHZrw Es3ytEKt6t5Jm9juC4kR7EgKQSX8BpRnM4WADtgFoq7j1WgbeEGW
 ```
-A script named `update-coinbase-address.sh` is generated and avaible in the folder after successful execution. 
+A script named `update-coinbase-address.<short_id>.sh` is generated and avaible in the folder after successful execution (*short_id* is the short id of your identity: the first 6 characters after the leading 888888).
 
 
 ### To generate a script to update the efficiency
@@ -70,7 +70,7 @@ A script named `update-coinbase-address.sh` is generated and avaible in the fold
 # Parameters: <Identity root chain ID> <Efficiency> <SK1 private key> <Paying private EC address> <Server Management Subchain ID>
 $ node bin/factom-identity-cli update-efficiency --offline -s localhost:8088 8888889822cf1d5889aa8dc11ad210b67d582812152de568fabc5f8505989c0f 50.1 sk12tdaziBoFyBHG56Ery3bPFFBDpy7Y3VymduGPfoj66cGhH4mHZrw Es3ytEKt6t5Jm9juC4kR7EgKQSX8BpRnM4WADtgFoq7j1WgbeEGW 8888887c01c12c72052f9c99b45782013feadb20c46ca86dc6e3a9730835848a
 ```
-A script named `update-efficiency.sh` is generated and avaible in the folder after successful execution. 
+A script named `update-efficiency.<short_id>.sh` is generated and avaible in the folder after successful execution (*short_id* is the short id of your identity: the first 6 characters after the leading 888888).
 Value of the *Server Management Subchain ID* can be found by looking at the identity root chain id in a Factom explorer: it is the value of the 3rd external id of the entry whose 2nd external id is equal to 'Register Server Management'. 
 
 ### To generate a script to add a coinbase cancel message
@@ -79,7 +79,7 @@ Value of the *Server Management Subchain ID* can be found by looking at the iden
 # Parameters: <Identity root chain ID> <Coinbase descriptor block height> <Coinbase descriptor index> <SK1 private key> <Paying private EC address> <Server Management Subchain ID>
 $ node bin/factom-identity-cli add-coinbase-cancel --offline -s localhost:8088 8888889822cf1d5889aa8dc11ad210b67d582812152de568fabc5f8505989c0f 39945 4 sk12tdaziBoFyBHG56Ery3bPFFBDpy7Y3VymduGPfoj66cGhH4mHZrw Es3ytEKt6t5Jm9juC4kR7EgKQSX8BpRnM4WADtgFoq7j1WgbeEGW 8888887c01c12c72052f9c99b45782013feadb20c46ca86dc6e3a9730835848a
 ```
-A script named `add-coinbase-cancel.sh` is generated and avaible in the folder after successful execution. 
+A script named `add-coinbase-cancel.<short_id>.sh` is generated and avaible in the folder after successful execution (*short_id* is the short id of your identity: the first 6 characters after the leading 888888).
 Value of the *Server Management Subchain ID* can be found by looking at the identity root chain id in a Factom explorer: it is the value of the 3rd external id of the entry whose 2nd external id is equal to 'Register Server Management'. 
 
 ## Run in Docker container

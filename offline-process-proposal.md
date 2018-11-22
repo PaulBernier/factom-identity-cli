@@ -61,7 +61,7 @@ $ node bin/factom-identity-cli update-coinbase-address --offline -s courtesy-nod
 $ node bin/factom-identity-cli update-efficiency --offline -s courtesy-node.factom.com:80 8888889822cf1d5889aa8dc11ad210b67d582812152de568fabc5f8505989c0f 50.1 sk12tdaziBoFyBHG56Ery3bPFFBDpy7Y3VymduGPfoj66cGhH4mHZrw Es3ytEKt6t5Jm9juC4kR7EgKQSX8BpRnM4WADtgFoq7j1WgbeEGW 8888887c01c12c72052f9c99b45782013feadb20c46ca86dc6e3a9730835848a
 ```
 
-Those 2 commands will create 2 scripts if successful: `update-coinbase-address.sh` and `update-efficiency.sh`. You are invited to audit the content of those scripts. Copy those 2 scripts to your DATA stick.
+Those 2 commands will create 2 scripts if successful: `update-coinbase-address.<short_id>.sh` and `update-efficiency.<short_id>.sh` where *short_id* is the short id of your identity (the first 6 characters after the leading 888888). You are invited to audit the content of those scripts. Copy those 2 scripts to your DATA stick.
 
 **Important: the scripts generated contain timestamped data. This has 2 consequences:**
 * The clock of the machine you are using to generate the scripts must be on time. It is not uncommon for the clock of an offline machine to not be synced so please verify and adjust it before generating the scripts. It only needs to be accurate to the minute.

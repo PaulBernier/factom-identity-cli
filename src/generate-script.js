@@ -11,7 +11,9 @@ function generateUpdateEfficiencyScript(rootChainId, serverManagementSubchainId,
     const composed = composeEntry(entry, ecPrivateAddress);
     const script = generateScript(`Updating identity [${rootChainId}] with efficiency [${efficiency}]`,
         composed.commit.toString('hex'), composed.reveal.toString('hex'), factomdInformation);
-    fs.writeFileSync('update-efficiency.sh', script);
+    const filename = `update-efficiency.${rootChainId.slice(6, 12)}.sh`;
+    fs.writeFileSync(filename, script);
+    return filename;
 }
 
 function generateUpdateCoinbaseAddressScript(rootChainId, fctAddress, sk1, ecPrivateAddress, factomdInformation) {
@@ -23,7 +25,9 @@ function generateUpdateCoinbaseAddressScript(rootChainId, fctAddress, sk1, ecPri
     const composed = composeEntry(entry, ecPrivateAddress);
     const script = generateScript(`Updating identity [${rootChainId}] with coinbase address [${fctAddress}]`,
         composed.commit.toString('hex'), composed.reveal.toString('hex'), factomdInformation);
-    fs.writeFileSync('update-coinbase-address.sh', script);
+    const filename = `update-coinbase-address.${rootChainId.slice(6, 12)}.sh`;
+    fs.writeFileSync(filename, script);
+    return filename;
 }
 
 function generateAddCoinbaseCancelScript(
@@ -41,7 +45,9 @@ function generateAddCoinbaseCancelScript(
         `Adding coinbase cancel message for height [${descriptorHeight}] and index [${descriptorIndex}] to identity [${rootChainId}]`,
         composed.commit.toString('hex'), composed.reveal.toString('hex'), factomdInformation);
 
-    fs.writeFileSync('add-coinbase-cancel.sh', script);
+    const filename = `add-coinbase-cancel.${rootChainId.slice(6, 12)}.sh`;
+    fs.writeFileSync(filename, script);
+    return filename;
 }
 
 function generateScript(message, commit, reveal, factomdInformation) {
@@ -53,6 +59,7 @@ function generateScript(message, commit, reveal, factomdInformation) {
     template = template.replace('_PORT_', factomdInformation.port);
     return template;
 }
+
 
 module.exports = {
     generateUpdateEfficiencyScript,

@@ -9,7 +9,7 @@ const FACTOMD_CONF = { host: 'test.factom.org', port: 8088 };
 describe('Generate scripts', function () {
 
     before(function () {
-        ['update-coinbase-address.sh', 'update-efficiency.sh', 'add-coinbase-address.sh'].forEach(function (f) {
+        ['update-coinbase-address.d027c5.sh', 'update-efficiency.d027c5.sh', 'add-coinbase-address.d027c5.sh'].forEach(function (f) {
             try {
                 fs.unlinkSync(f);
             } catch (e) { }
@@ -25,13 +25,13 @@ describe('Generate scripts', function () {
             'Es32PjobTxPTd73dohEFRegMFRLv3X5WZ4FXEwNN8kE2pMDfeMym',
             FACTOMD_CONF);
 
-        const script = fs.readFileSync('update-coinbase-address.sh').toString();
+        const script = fs.readFileSync('update-coinbase-address.d027c5.sh').toString();
         assert.include(script, 'coinbase address');
         assert.include(script, 'test.factom.org');
         assert.include(script, '8088');
         assert.notInclude(script, 'undefined');
 
-        fs.unlinkSync('update-coinbase-address.sh');
+        fs.unlinkSync('update-coinbase-address.d027c5.sh');
     });
 
 
@@ -45,13 +45,13 @@ describe('Generate scripts', function () {
             'Es32PjobTxPTd73dohEFRegMFRLv3X5WZ4FXEwNN8kE2pMDfeMym',
             FACTOMD_CONF);
 
-        const script = fs.readFileSync('update-efficiency.sh').toString();
+        const script = fs.readFileSync('update-efficiency.d027c5.sh').toString();
         assert.include(script, 'efficiency');
         assert.include(script, 'test.factom.org');
         assert.include(script, '8088');
         assert.notInclude(script, 'undefined');
 
-        fs.unlinkSync('update-efficiency.sh');
+        fs.unlinkSync('update-efficiency.d027c5.sh');
     });
 
     it('should generate add coinbase cancel script', function () {
@@ -65,12 +65,12 @@ describe('Generate scripts', function () {
             'Es32PjobTxPTd73dohEFRegMFRLv3X5WZ4FXEwNN8kE2pMDfeMym',
             FACTOMD_CONF);
 
-        const script = fs.readFileSync('add-coinbase-cancel.sh').toString();
+        const script = fs.readFileSync('add-coinbase-cancel.d027c5.sh').toString();
         assert.include(script, 'coinbase cancel');
         assert.include(script, 'test.factom.org');
         assert.include(script, '8088');
         assert.notInclude(script, 'undefined');
 
-        fs.unlinkSync('add-coinbase-cancel.sh');
+        fs.unlinkSync('add-coinbase-cancel.d027c5.sh');
     });
 });

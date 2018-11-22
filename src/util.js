@@ -1,5 +1,3 @@
-const colors = require('colors');
-
 function getConnectionInformation(socket, defaultPort) {
     let host = 'localhost',
         port = defaultPort;
@@ -15,12 +13,6 @@ function getConnectionInformation(socket, defaultPort) {
     };
 }
 
-function printError(e) {
-    const message = e instanceof Error ? e.message : e;
-    console.error(colors.red(`Error: ${message}`));
-}
-
 module.exports = {
-    getConnectionInformation,
-    printError
+    getConnectionInformation
 };
