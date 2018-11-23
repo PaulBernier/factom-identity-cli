@@ -65,7 +65,7 @@ Those 2 commands will create 2 scripts if successful: `update-coinbase-address.<
 
 **Important: the scripts generated contain timestamped data. This has 2 consequences:**
 * The clock of the machine you are using to generate the scripts must be on time. It is not uncommon for the clock of an offline machine to not be synced so please verify and adjust it before generating the scripts. It only needs to be accurate to the minute.
-* The scripts have a limited time of validity. You must execute the scripts within 1 hour of their creation to be certain that the entries contained in them will be accepted by the network.
+* The scripts are only valid for a limited time. You must execute the scripts within 1 hour of their creation to be certain that the entries contained in them will be accepted by the network.
 
 ### 8. Shutdown the Ubuntu session
 
