@@ -36,7 +36,7 @@ exports.handler = async function (argv) {
     console.error('');
     if (argv.offline) {
         try {
-            console.error(chalk.blue.bold('Remember to always verify that the clock of your computer is synced when using the offline mode (see README for the reasons).'));
+            console.error(chalk.bgBlue.bold('  INFO  ') + ' Remember to always verify that the clock of your computer is synced when using the offline mode (see README for the reasons).\n');
             spinner = ora(`Generating script to update Identity ${chalk.yellow.bold(argv.rchainid)} with coinbase address ${chalk.yellow.bold(argv.fctaddress)}...`).start();
 
             const filename = generateUpdateCoinbaseAddressScript(argv.rchainid, argv.fctaddress, argv.sk1, argv.secaddress, factomdInformation);

@@ -46,7 +46,7 @@ exports.handler = async function (argv) {
         }
 
         try {
-            console.error(chalk.blue.bold('Remember to always verify that the clock of your computer is synced when using the offline mode (see README for the reasons).'));
+            console.error(chalk.bgBlue.bold('  INFO  ') + ' Remember to always verify that the clock of your computer is synced when using the offline mode (see README for the reasons).\n');
             spinner = ora(`Generating script to add a cancel coinbase message for height ${chalk.yellow.bold(argv.height)} and index ${chalk.yellow.bold(argv.index)} to Identity ${chalk.yellow.bold(argv.rchainid)}...`).start();
 
             const filename = generateAddCoinbaseCancelScript(argv.rchainid, argv.smchainid, argv.height, argv.index, argv.sk1, argv.secaddress, factomdInformation);

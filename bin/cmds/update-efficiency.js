@@ -43,7 +43,7 @@ exports.handler = async function (argv) {
         }
 
         try {
-            console.error(chalk.blue.bold('Remember to always verify that the clock of your computer is synced when using the offline mode (see README for the reasons).'));
+            console.error(chalk.bgBlue.bold('  INFO  ') + ' Remember to always verify that the clock of your computer is synced when using the offline mode (see README for the reasons).\n');
             spinner = ora(`Generating script to update Identity ${chalk.yellow.bold(argv.rchainid)} with an efficiency of ${chalk.yellow.bold(argv.efficiency)}...`).start();
 
             const filename = generateUpdateEfficiencyScript(argv.rchainid, argv.smchainid, argv.efficiency, argv.sk1, argv.secaddress, factomdInformation);
