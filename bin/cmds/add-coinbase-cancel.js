@@ -42,34 +42,34 @@ exports.handler = async function (argv) {
     console.error('');
     if (argv.offline) {
         if (!argv.smchainid) {
-            return console.error(chalk.red.bold('Server Management Subchain Id needs to be specified as the last (6th) argument in offline mode'));
+            return console.error(chalk.red('Server Management Subchain Id needs to be specified as the last (6th) argument in offline mode'));
         }
 
         try {
             console.error(chalk.bgBlue.bold('  INFO  ') + ' Remember to always verify that the clock of your computer is synced when using the offline mode (see README for the reasons).\n');
-            spinner = ora(`Generating script to add a cancel coinbase message for height ${chalk.yellow.bold(argv.height)} and index ${chalk.yellow.bold(argv.index)} to Identity ${chalk.yellow.bold(argv.rchainid)}...`).start();
+            spinner = ora(`Generating script to add a cancel coinbase message for height ${chalk.yellow(argv.height)} and index ${chalk.yellow(argv.index)} to Identity ${chalk.yellow(argv.rchainid)}...`).start();
 
             const filename = generateAddCoinbaseCancelScript(argv.rchainid, argv.smchainid, argv.height, argv.index, argv.sk1, argv.secaddress, factomdInformation);
 
             spinner.succeed();
-            console.error(`Execute ${chalk.yellow.bold(filename)} script on a machine with curl command and an Internet connection.`);
+            console.error(`Execute ${chalk.yellow(filename)} script on a machine with curl command and an Internet connection.`);
         } catch (e) {
             const message = e instanceof Error ? e.message : e;
             spinner.fail();
-            console.error(chalk.red.bold(message));
+            console.error(chalk.red(message));
         }
 
     } else {
-        spinner = ora(`Adding coinbase cancel message for height ${chalk.yellow.bold(argv.height)} and index ${chalk.yellow.bold(argv.index)} to Identity ${chalk.yellow.bold(argv.rchainid)}...`).start();
+        spinner = ora(`Adding coinbase cancel message for height ${chalk.yellow(argv.height)} and index ${chalk.yellow(argv.index)} to Identity ${chalk.yellow(argv.rchainid)}...`).start();
 
         try {
             const data = await manager.addCoinbaseCancel(argv.rchainid, argv.height, argv.index, argv.sk1, argv.secaddress);
             spinner.succeed();
-            console.error(`Please wait for the next block to see the effect. Entry hash of the update: ${chalk.yellow.bold(data.entryHash)}.`);
+            console.error(`Please wait for the next block to see the effect. Entry hash of the update: ${chalk.yellow(data.entryHash)}.`);
         } catch (e) {
             const message = e instanceof Error ? e.message : e;
             spinner.fail();
-            console.error(chalk.red.bold(message));
+            console.error(chalk.red(message));
         }
     }
     console.error('');

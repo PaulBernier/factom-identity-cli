@@ -30,7 +30,7 @@ exports.handler = async function (argv) {
     let spinner;
     console.error('');
     if (argv.history) {
-        spinner = ora(`Retrieving historical information of identity ${chalk.yellow.bold(argv.rchainid)}...`).start();
+        spinner = ora(`Retrieving historical information of identity ${chalk.yellow(argv.rchainid)}...`).start();
         try {
             const result = await manager.getServerIdentityHistory(argv.rchainid);
             spinner.succeed();
@@ -39,10 +39,10 @@ exports.handler = async function (argv) {
         } catch (e) {
             const message = e instanceof Error ? e.message : e;
             spinner.fail();
-            console.error(chalk.red.bold(message));
+            console.error(chalk.red(message));
         }
     } else {
-        spinner = ora(`Retrieving latest information of identity ${chalk.yellow.bold(argv.rchainid)}...`).start();
+        spinner = ora(`Retrieving latest information of identity ${chalk.yellow(argv.rchainid)}...`).start();
         try {
             const result = await manager.getServerIdentity(argv.rchainid);
             spinner.succeed();
@@ -51,7 +51,7 @@ exports.handler = async function (argv) {
         } catch (e) {
             const message = e instanceof Error ? e.message : e;
             spinner.fail();
-            console.error(chalk.red.bold(message));
+            console.error(chalk.red(message));
         }
     }
     console.error('');

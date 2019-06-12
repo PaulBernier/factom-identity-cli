@@ -37,28 +37,28 @@ exports.handler = async function (argv) {
     if (argv.offline) {
         try {
             console.error(chalk.bgBlue.bold('  INFO  ') + ' Remember to always verify that the clock of your computer is synced when using the offline mode (see README for the reasons).\n');
-            spinner = ora(`Generating script to update Identity ${chalk.yellow.bold(argv.rchainid)} with coinbase address ${chalk.yellow.bold(argv.fctaddress)}...`).start();
+            spinner = ora(`Generating script to update Identity ${chalk.yellow(argv.rchainid)} with coinbase address ${chalk.yellow(argv.fctaddress)}...`).start();
 
             const filename = generateUpdateCoinbaseAddressScript(argv.rchainid, argv.fctaddress, argv.sk1, argv.secaddress, factomdInformation);
             
             spinner.succeed();
-            console.error(`Execute ${chalk.yellow.bold(filename)} script on a machine with curl command and an Internet connection.`);
+            console.error(`Execute ${chalk.yellow(filename)} script on a machine with curl command and an Internet connection.`);
         } catch (e) {
             const message = e instanceof Error ? e.message : e;
             spinner.fail();
-            console.error(chalk.red.bold(message));
+            console.error(chalk.red(message));
         }
     } else {
-        spinner = ora(`Updating Identity ${chalk.yellow.bold(argv.rchainid)} with coinbase address address ${chalk.yellow.bold(argv.fctaddress)}...`).start();
+        spinner = ora(`Updating Identity ${chalk.yellow(argv.rchainid)} with coinbase address address ${chalk.yellow(argv.fctaddress)}...`).start();
 
         try {
             const data = await manager.updateCoinbaseAddress(argv.rchainid, argv.fctaddress, argv.sk1, argv.secaddress);
             spinner.succeed();
-            console.error(`Please wait for the next block to see the effect. Entry hash of the update: ${chalk.yellow.bold(data.entryHash)}.`);
+            console.error(`Please wait for the next block to see the effect. Entry hash of the update: ${chalk.yellow(data.entryHash)}.`);
         } catch (e) {
             const message = e instanceof Error ? e.message : e;
             spinner.fail();
-            console.error(chalk.red.bold(message));
+            console.error(chalk.red(message));
         }
     }
     console.error('');
