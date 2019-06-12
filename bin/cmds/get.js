@@ -8,22 +8,25 @@ const ora = require('ora'),
 exports.command = 'get <rchainid>';
 exports.describe = 'Get identity information.';
 
-exports.builder = function (yargs) {
-    return yargs.option('socket', {
-        alias: 's',
-        type: 'string',
-        describe: 'factomd API endpoint.',
-        default: 'http://localhost:8088/v2'
-    }).option('history', {
-        alias: 'h',
-        type: 'boolean',
-        describe: 'IPAddress:port of factomd API.'
-    }).positional('rchainid', {
-        describe: 'Identity root chain id.'
-    });
+exports.builder = function(yargs) {
+    return yargs
+        .option('socket', {
+            alias: 's',
+            type: 'string',
+            describe: 'factomd API endpoint.',
+            default: 'http://localhost:8088/v2'
+        })
+        .option('history', {
+            alias: 'h',
+            type: 'boolean',
+            describe: 'IPAddress:port of factomd API.'
+        })
+        .positional('rchainid', {
+            describe: 'Identity root chain id.'
+        });
 };
 
-exports.handler = async function (argv) {
+exports.handler = async function(argv) {
     const factomdInformation = getConnectionInformation(argv.socket);
     const manager = new FactomServerIdentityManager(factomdInformation);
 

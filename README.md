@@ -94,8 +94,9 @@ Use `--history` option.
 You can use this tool to generate offline a bash script that can later be executed on a machine connected to the Internet (the scripts only require curl command to be installed). The use is mainly intended for Authority Servers operators who require maximum security. Your offline machine will need Node.js installed and this tool with all its dependencies available. You are strongly encouraged to audit the content of the generated scripts.
 
 **Important: the scripts generated contain timestamped data. This has 2 consequences:**
-* The clock of the machine you are using to generate the scripts must be on time. It is not uncommon for the clock of an offline machine to not be synced so please verify and adjust it before generating the scripts. It only needs to be accurate to the minute.
-* The scripts are only valid for a limited time. You must execute the scripts within 1 hour of their creation to be certain that the entries contained in them will be accepted by the network.
+
+-   The clock of the machine you are using to generate the scripts must be on time. It is not uncommon for the clock of an offline machine to not be synced so please verify and adjust it before generating the scripts. It only needs to be accurate to the minute.
+-   The scripts are only valid for a limited time. You must execute the scripts within 1 hour of their creation to be certain that the entries contained in them will be accepted by the network.
 
 ### To generate a script to update the coinbase address
 
@@ -107,8 +108,7 @@ You can use this tool to generate offline a bash script that can later be execut
  --secaddress Es3ytEKt6t5Jm9juC4kR7EgKQSX8BpRnM4WADtgFoq7j1WgbeEGW
 ```
 
-A script named `update-coinbase-address.<short_id>.sh` is generated and avaible in the folder after successful execution (*short_id* is the short id of your identity: the first 6 characters after the leading 888888).
-
+A script named `update-coinbase-address.<short_id>.sh` is generated and avaible in the folder after successful execution (_short_id_ is the short id of your identity: the first 6 characters after the leading 888888).
 
 ### To generate a script to update the efficiency
 
@@ -121,8 +121,8 @@ A script named `update-coinbase-address.<short_id>.sh` is generated and avaible 
  --smchainid 8888887c01c12c72052f9c99b45782013feadb20c46ca86dc6e3a9730835848a
 ```
 
-A script named `update-efficiency.<short_id>.sh` is generated and avaible in the folder after successful execution (*short_id* is the short id of your identity: the first 6 characters after the leading 888888).
-Value of the *Server Management Subchain ID* can be found by looking at the identity root chain id in a Factom explorer: it is the value of the 3rd external id of the entry whose 2nd external id is equal to 'Register Server Management'. 
+A script named `update-efficiency.<short_id>.sh` is generated and avaible in the folder after successful execution (_short_id_ is the short id of your identity: the first 6 characters after the leading 888888).
+Value of the _Server Management Subchain ID_ can be found by looking at the identity root chain id in a Factom explorer: it is the value of the 3rd external id of the entry whose 2nd external id is equal to 'Register Server Management'.
 
 ### To generate a script to add a coinbase cancel message
 
@@ -136,8 +136,8 @@ Value of the *Server Management Subchain ID* can be found by looking at the iden
  --smchainid 8888887c01c12c72052f9c99b45782013feadb20c46ca86dc6e3a9730835848a
 ```
 
-A script named `add-coinbase-cancel.<short_id>.sh` is generated and avaible in the folder after successful execution (*short_id* is the short id of your identity: the first 6 characters after the leading 888888).
-Value of the *Server Management Subchain ID* can be found by looking at the identity root chain id in a Factom explorer: it is the value of the 3rd external id of the entry whose 2nd external id is equal to 'Register Server Management'. 
+A script named `add-coinbase-cancel.<short_id>.sh` is generated and avaible in the folder after successful execution (_short_id_ is the short id of your identity: the first 6 characters after the leading 888888).
+Value of the _Server Management Subchain ID_ can be found by looking at the identity root chain id in a Factom explorer: it is the value of the 3rd external id of the entry whose 2nd external id is equal to 'Register Server Management'.
 
 ## Run in Docker container
 

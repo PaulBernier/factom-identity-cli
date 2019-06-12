@@ -4,14 +4,14 @@
 
 You will need 2 usb sticks ready:
 
-* One that will be used to boot a temporary linux to perform the operations. This usb stick will be now referenced as BOOT stick.
-* One that will be used to store data related to the operations. This usb stick will be now referenced as DATA stick. Copy that file to this stick to be able to follow the instructions at all time.
+-   One that will be used to boot a temporary linux to perform the operations. This usb stick will be now referenced as BOOT stick.
+-   One that will be used to store data related to the operations. This usb stick will be now referenced as DATA stick. Copy that file to this stick to be able to follow the instructions at all time.
 
 You will also need your Factom identity information handy:
 
-* Your identity root chain id (starts with 888888)
-* Your server management subchain id (starts with 888888)
-* Your secret level 1 identity key (starts with SK1)
+-   Your identity root chain id (starts with 888888)
+-   Your server management subchain id (starts with 888888)
+-   Your secret level 1 identity key (starts with SK1)
 
 The value of the Server Management Subchain ID can be found by looking at the identity root chain id in a Factom explorer: it is the value of the 3rd external id of the entry whose 2nd external id is equal to 'Register Server Management'.
 
@@ -45,7 +45,7 @@ npm install
 
 ### 6. Turn off the internet connection
 
-From now on your ubuntu should *never* get connected to the Internet. You can double check by typing `ping 8.8.8.8`. Or you can unplung your wifi if you really want to be sure...
+From now on your ubuntu should _never_ get connected to the Internet. You can double check by typing `ping 8.8.8.8`. Or you can unplung your wifi if you really want to be sure...
 
 ### 7. Generate update scripts
 
@@ -71,23 +71,23 @@ In a terminal, with your own values:
   --smchainid 8888887c01c12c72052f9c99b45782013feadb20c46ca86dc6e3a9730835848a
 ```
 
-Those 2 commands will create 2 scripts if successful: `update-coinbase-address.<short_id>.sh` and `update-efficiency.<short_id>.sh` where *short_id* is the short id of your identity (the first 6 characters after the leading 888888). You are invited to audit the content of those scripts. Copy those 2 scripts to your DATA stick.
+Those 2 commands will create 2 scripts if successful: `update-coinbase-address.<short_id>.sh` and `update-efficiency.<short_id>.sh` where _short_id_ is the short id of your identity (the first 6 characters after the leading 888888). You are invited to audit the content of those scripts. Copy those 2 scripts to your DATA stick.
 
 **Important: the scripts generated contain timestamped data. This has 2 consequences:**
-* The clock of the machine you are using to generate the scripts must be on time. It is not uncommon for the clock of an offline machine to not be synced so please verify and adjust it before generating the scripts. It only needs to be accurate to the minute.
-* The scripts are only valid for a limited time. You must execute the scripts within 1 hour of their creation to be certain that the entries contained in them will be accepted by the network.
+
+-   The clock of the machine you are using to generate the scripts must be on time. It is not uncommon for the clock of an offline machine to not be synced so please verify and adjust it before generating the scripts. It only needs to be accurate to the minute.
+-   The scripts are only valid for a limited time. You must execute the scripts within 1 hour of their creation to be certain that the entries contained in them will be accepted by the network.
 
 ### 8. Shutdown the Ubuntu session
 
 ### 9. Execute the scripts to update efficiency and coinbase address
 
-* Log into a computer with internet connection.
-* Plugin the DATA stick.
-* Execute both bash scripts. They simply use `curl` command line that should be available on most unix based systems. The scripts will make the requests through the Factom Open Node network. You can edit the scripts to choose another endpoint (localhost for instance).
-* Inspect the output of the scripts for success messages.
-* You can check in an explorer that your identity root chain and server management subchain have been updated after 10 minutes (next block).
+-   Log into a computer with internet connection.
+-   Plugin the DATA stick.
+-   Execute both bash scripts. They simply use `curl` command line that should be available on most unix based systems. The scripts will make the requests through the Factom Open Node network. You can edit the scripts to choose another endpoint (localhost for instance).
+-   Inspect the output of the scripts for success messages.
+-   You can check in an explorer that your identity root chain and server management subchain have been updated after 10 minutes (next block).
 
 ### 10. Format the BOOT stick
 
 Or even better, do a secure erase with specialized tools.
-
