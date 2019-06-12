@@ -56,12 +56,12 @@ In a terminal:
 
 ```bash
 # Parameters: <Identity root chain ID> <FCT public address> <SK1 private key> <Paying private EC address>
- node bin/factom-identity-cli update-coinbase-address --offline -s courtesy-node.factom.com:80 8888889822cf1d5889aa8dc11ad210b67d582812152de568fabc5f8505989c0f FA3HZDE4MdXAthauFoA3aKYpx33U4fT2kAABmfwk7NBqyLT2zed5 sk12tdaziBoFyBHG56Ery3bPFFBDpy7Y3VymduGPfoj66cGhH4mHZrw Es3ytEKt6t5Jm9juC4kR7EgKQSX8BpRnM4WADtgFoq7j1WgbeEGW
+ node bin/factom-identity-cli update-coinbase-address --offline -s https://api.factomd.net/v2 8888889822cf1d5889aa8dc11ad210b67d582812152de568fabc5f8505989c0f FA3HZDE4MdXAthauFoA3aKYpx33U4fT2kAABmfwk7NBqyLT2zed5 sk12tdaziBoFyBHG56Ery3bPFFBDpy7Y3VymduGPfoj66cGhH4mHZrw Es3ytEKt6t5Jm9juC4kR7EgKQSX8BpRnM4WADtgFoq7j1WgbeEGW
 ```
 
 ```bash
 # Parameters: <Identity root chain ID> <Efficiency> <SK1 private key> <Paying private EC address> <Server Management Subchain ID>
- node bin/factom-identity-cli update-efficiency --offline -s courtesy-node.factom.com:80 8888889822cf1d5889aa8dc11ad210b67d582812152de568fabc5f8505989c0f 50.1 sk12tdaziBoFyBHG56Ery3bPFFBDpy7Y3VymduGPfoj66cGhH4mHZrw Es3ytEKt6t5Jm9juC4kR7EgKQSX8BpRnM4WADtgFoq7j1WgbeEGW 8888887c01c12c72052f9c99b45782013feadb20c46ca86dc6e3a9730835848a
+ node bin/factom-identity-cli update-efficiency --offline -s https://api.factomd.net/v2 8888889822cf1d5889aa8dc11ad210b67d582812152de568fabc5f8505989c0f 50.1 sk12tdaziBoFyBHG56Ery3bPFFBDpy7Y3VymduGPfoj66cGhH4mHZrw Es3ytEKt6t5Jm9juC4kR7EgKQSX8BpRnM4WADtgFoq7j1WgbeEGW 8888887c01c12c72052f9c99b45782013feadb20c46ca86dc6e3a9730835848a
 ```
 
 Those 2 commands will create 2 scripts if successful: `update-coinbase-address.<short_id>.sh` and `update-efficiency.<short_id>.sh` where *short_id* is the short id of your identity (the first 6 characters after the leading 888888). You are invited to audit the content of those scripts. Copy those 2 scripts to your DATA stick.
@@ -76,7 +76,7 @@ Those 2 commands will create 2 scripts if successful: `update-coinbase-address.<
 
 * Log into a computer with internet connection.
 * Plugin the DATA stick.
-* Execute both bash scripts. They simply use `curl` command line that should be available on most unix based systems. The scripts will make the requests to Factom Inc. courtesy node. You can edit the scripts to choose another endpoint (localhost for instance).
+* Execute both bash scripts. They simply use `curl` command line that should be available on most unix based systems. The scripts will make the requests through the Factom Open Node network. You can edit the scripts to choose another endpoint (localhost for instance).
 * Inspect the output of the scripts for success messages.
 * You can check in an explorer that your identity root chain and server management subchain have been updated after 10 minutes (next block).
 

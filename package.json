@@ -15,7 +15,7 @@
   "dependencies": {
     "chalk": "^2.4.2",
     "factom": "^1.2.3",
-    "factom-identity-lib": "^0.1.11",
+    "factom-identity-lib": "0.2.0-rc7",
     "ora": "^3.4.0",
     "yargs": "^13.2.4"
   },

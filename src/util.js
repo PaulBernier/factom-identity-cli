@@ -1,16 +1,19 @@
-function getConnectionInformation(socket, defaultPort) {
-    let host = 'localhost',
-        port = defaultPort;
-    if (socket) {
-        const splitSocket = socket.split(':');
-        host = splitSocket[0] || host;
-        port = splitSocket[1] || port;
-    }
-
+function getConnectionInformation(endpoint) {
+    const url = new URL(endpoint.includes('://') ? endpoint : `http://${endpoint}`);
     return {
-        host: host,
-        port: port
+        host: url.hostname,
+        port: getIntegerPort(url),
+        protocol: url.protocol.slice(0, -1),
+        path: url.pathname
     };
+}
+
+function getIntegerPort(url) {
+    if (url.port) {
+        return parseInt(url.port);
+    } else {
+        return url.protocol === 'https:' ? 443 : 80;
+    }
 }
 
 module.exports = {

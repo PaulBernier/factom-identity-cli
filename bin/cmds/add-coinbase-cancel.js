@@ -2,7 +2,7 @@
 
 const ora = require('ora'),
     chalk = require('chalk'),
-    { FactomIdentityManager } = require('factom-identity-lib'),
+    { FactomServerIdentityManager  } = require('factom-identity-lib').server,
     { generateAddCoinbaseCancelScript } = require('../../src/generate-script'),
     { getConnectionInformation } = require('../../src/util');
 
@@ -12,8 +12,8 @@ exports.describe = 'Add a coinbase cancel message to an identity.';
 exports.builder = function (yargs) {
     return yargs.option('socket', {
         alias: 's',
-        describe: 'IPAddress:port of factomd API.',
-        default: 'localhost:8088'
+        describe: 'factomd API endpoint.',
+        default: 'http://localhost:8088/v2'
     }).option('offline', {
         describe: 'Generate offline a script to be excuted at a later time on a machine connected to the Internet.',
         type: 'boolean'
@@ -35,8 +35,8 @@ exports.builder = function (yargs) {
 };
 
 exports.handler = async function (argv) {
-    const factomdInformation = getConnectionInformation(argv.socket, 8088);
-    const manager = new FactomIdentityManager(factomdInformation);
+    const factomdInformation = getConnectionInformation(argv.socket);
+    const manager = new FactomServerIdentityManager(factomdInformation);
 
     let spinner;
     console.error('');

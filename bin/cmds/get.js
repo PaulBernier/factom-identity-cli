@@ -2,7 +2,7 @@
 
 const ora = require('ora'),
     chalk = require('chalk'),
-    { FactomIdentityManager } = require('factom-identity-lib'),
+    { FactomServerIdentityManager } = require('factom-identity-lib').server,
     { getConnectionInformation } = require('../../src/util');
 
 exports.command = 'get <rchainid>';
@@ -12,8 +12,8 @@ exports.builder = function (yargs) {
     return yargs.option('socket', {
         alias: 's',
         type: 'string',
-        describe: 'IPAddress:port of factomd API.',
-        default: 'localhost:8088'
+        describe: 'factomd API endpoint.',
+        default: 'http://localhost:8088/v2'
     }).option('history', {
         alias: 'h',
         type: 'boolean',
@@ -24,15 +24,15 @@ exports.builder = function (yargs) {
 };
 
 exports.handler = async function (argv) {
-    const factomdInformation = getConnectionInformation(argv.socket, 8088);
-    const manager = new FactomIdentityManager(factomdInformation);
+    const factomdInformation = getConnectionInformation(argv.socket);
+    const manager = new FactomServerIdentityManager(factomdInformation);
 
     let spinner;
     console.error('');
     if (argv.history) {
         spinner = ora(`Retrieving historical information of identity ${chalk.yellow.bold(argv.rchainid)}...`).start();
         try {
-            const result = await manager.getIdentityInformationHistory(argv.rchainid);
+            const result = await manager.getServerIdentityHistory(argv.rchainid);
             spinner.succeed();
             console.error('');
             console.log(JSON.stringify(result, null, 4));
@@ -44,7 +44,7 @@ exports.handler = async function (argv) {
     } else {
         spinner = ora(`Retrieving latest information of identity ${chalk.yellow.bold(argv.rchainid)}...`).start();
         try {
-            const result = await manager.getIdentityInformation(argv.rchainid);
+            const result = await manager.getServerIdentity(argv.rchainid);
             spinner.succeed();
             console.error('');
             console.log(JSON.stringify(result, null, 4));
@@ -55,5 +55,4 @@ exports.handler = async function (argv) {
         }
     }
     console.error('');
-
 };
