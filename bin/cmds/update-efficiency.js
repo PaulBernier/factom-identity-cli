@@ -6,7 +6,7 @@ const ora = require('ora'),
     { generateUpdateEfficiencyScript } = require('../../src/generate-script'),
     { getConnectionInformation } = require('../../src/util');
 
-exports.command = 'update-efficiency <rchainid> <efficiency> <sk1> <secaddress> [smchainid]';
+exports.command = 'update-efficiency';
 exports.describe = 'Update efficiency or generate a script to update efficiency.';
 
 exports.builder = function (yargs) {
@@ -17,18 +17,25 @@ exports.builder = function (yargs) {
     }).option('offline', {
         describe: 'Generate offline a script to be excuted at a later time on a machine connected to the Internet.',
         type: 'boolean'
-    }).positional('rchainid', {
+    }).option('identity', {
+        alias: 'id',
+        demandOption: true,
         describe: 'Identity root chain id.'
-    }).positional('efficiency', {
+    }).option('efficiency',  {
+        alias: 'eff',
+        demandOption: true,
         describe: 'Efficiency value. Decimal number between 0 and 100.',
         type: 'number'
-    }).positional('sk1', {
+    }).option('sk1', {
+        demandOption: true,
         describe: 'Secret level 1 key (starts with sk1...) to sign the update.'
-    }).positional('secaddress', {
+    }).option('secaddress', {
+        alias: 'sec',
+        demandOption: true,
         describe: 'Private EC address (starts with Es...) to pay the update.'
-    }).positional('smchainid', {
-        describe: 'Identity server management subchain id (only for offline mode).'
-    });
+    }).option('smchainid', {
+        describe: 'Identity server management subchain id (only required for offline mode).'
+    }).implies('offline', 'smchainid');
 };
 
 exports.handler = async function (argv) {
@@ -39,14 +46,14 @@ exports.handler = async function (argv) {
     console.error('');
     if (argv.offline) {
         if (!argv.smchainid) {
-            return console.error(chalk.red('Server Management Subchain Id needs to be specified as the last (5th) argument in offline mode'));
+            return console.error(chalk.red('Server Management Subchain Id needs to be specified (--smchainid) in offline mode'));
         }
 
         try {
             console.error(chalk.bgBlue.bold('  INFO  ') + ' Remember to always verify that the clock of your computer is synced when using the offline mode (see README for the reasons).\n');
-            spinner = ora(`Generating script to update Identity ${chalk.yellow(argv.rchainid)} with an efficiency of ${chalk.yellow(argv.efficiency)}...`).start();
+            spinner = ora(`Generating script to update Identity ${chalk.yellow(argv.identity)} with an efficiency of ${chalk.yellow(argv.efficiency)}...`).start();
 
-            const filename = generateUpdateEfficiencyScript(argv.rchainid, argv.smchainid, argv.efficiency, argv.sk1, argv.secaddress, factomdInformation);
+            const filename = generateUpdateEfficiencyScript(argv.identity, argv.smchainid, argv.efficiency, argv.sk1, argv.secaddress, factomdInformation);
             spinner.succeed();
             console.error(`Execute ${chalk.yellow(filename)} script on a machine with curl command and an Internet connection.`);
         } catch (e) {
@@ -56,10 +63,10 @@ exports.handler = async function (argv) {
         }
 
     } else {
-        spinner = ora(`Updating Identity ${chalk.yellow(argv.rchainid)} with an efficiency of ${chalk.yellow(argv.efficiency)}...`).start();
+        spinner = ora(`Updating Identity ${chalk.yellow(argv.identity)} with an efficiency of ${chalk.yellow(argv.efficiency)}...`).start();
 
         try {
-            const data = await manager.updateEfficiency(argv.rchainid, argv.efficiency, argv.sk1, argv.secaddress);
+            const data = await manager.updateEfficiency(argv.identity, argv.efficiency, argv.sk1, argv.secaddress);
             spinner.succeed();
             console.error(`Please wait for the next block to see the effect. Entry hash of the update: ${chalk.yellow(data.entryHash)}.`);
         } catch (e) {

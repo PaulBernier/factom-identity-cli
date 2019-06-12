@@ -6,7 +6,7 @@ const ora = require('ora'),
     { generateUpdateCoinbaseAddressScript } = require('../../src/generate-script'),
     { getConnectionInformation } = require('../../src/util');
 
-exports.command = 'update-coinbase-address <rchainid> <fctaddress> <sk1> <secaddress>';
+exports.command = 'update-coinbase-address';
 exports.describe = 'Update coinbase address or generate a script to update coinbase address.';
 
 exports.builder = function (yargs) {
@@ -17,13 +17,20 @@ exports.builder = function (yargs) {
     }).option('offline', {
         describe: 'Generate offline a script to be excuted at a later time on a machine connected to the Internet.',
         type: 'boolean'
-    }).positional('rchainid', {
+    }).option('identity', {
+        alias: 'id',
+        demandOption: true,
         describe: 'Identity root chain id.'
-    }).positional('fctaddress', {
+    }).option('fctaddress', {
+        alias: 'fct',
+        demandOption: true,
         describe: 'Public Factoid address (starts with FA...) that will receive coinbase payouts.'
-    }).positional('sk1', {
+    }).option('sk1', {
+        demandOption: true,
         describe: 'Secret level 1 key (starts with sk1...) to sign the update.'
-    }).positional('secaddress', {
+    }).option('secaddress', {
+        alias: 'sec',
+        demandOption: true,
         describe: 'Private EC address (starts with Es...) to pay the update.'
     });
 };
@@ -37,9 +44,9 @@ exports.handler = async function (argv) {
     if (argv.offline) {
         try {
             console.error(chalk.bgBlue.bold('  INFO  ') + ' Remember to always verify that the clock of your computer is synced when using the offline mode (see README for the reasons).\n');
-            spinner = ora(`Generating script to update Identity ${chalk.yellow(argv.rchainid)} with coinbase address ${chalk.yellow(argv.fctaddress)}...`).start();
+            spinner = ora(`Generating script to update Identity ${chalk.yellow(argv.identity)} with coinbase address ${chalk.yellow(argv.fctaddress)}...`).start();
 
-            const filename = generateUpdateCoinbaseAddressScript(argv.rchainid, argv.fctaddress, argv.sk1, argv.secaddress, factomdInformation);
+            const filename = generateUpdateCoinbaseAddressScript(argv.identity, argv.fctaddress, argv.sk1, argv.secaddress, factomdInformation);
             
             spinner.succeed();
             console.error(`Execute ${chalk.yellow(filename)} script on a machine with curl command and an Internet connection.`);
@@ -49,10 +56,10 @@ exports.handler = async function (argv) {
             console.error(chalk.red(message));
         }
     } else {
-        spinner = ora(`Updating Identity ${chalk.yellow(argv.rchainid)} with coinbase address address ${chalk.yellow(argv.fctaddress)}...`).start();
+        spinner = ora(`Updating Identity ${chalk.yellow(argv.identity)} with coinbase address address ${chalk.yellow(argv.fctaddress)}...`).start();
 
         try {
-            const data = await manager.updateCoinbaseAddress(argv.rchainid, argv.fctaddress, argv.sk1, argv.secaddress);
+            const data = await manager.updateCoinbaseAddress(argv.identity, argv.fctaddress, argv.sk1, argv.secaddress);
             spinner.succeed();
             console.error(`Please wait for the next block to see the effect. Entry hash of the update: ${chalk.yellow(data.entryHash)}.`);
         } catch (e) {
