@@ -101,7 +101,7 @@ You can use this tool to generate offline a bash script that can later be execut
 ### To generate a script to update the coinbase address
 
 ```bash
- node bin/factom-identity-cli update-coinbase-address --offline -s http://localhost:8088/v2 \
+ node bin/factom-identity-cli update-coinbase-address --offline -s https://api.factomd.net/v2 \
  --id 8888889822cf1d5889aa8dc11ad210b67d582812152de568fabc5f8505989c0f \
  --sk1 sk12tdaziBoFyBHG56Ery3bPFFBDpy7Y3VymduGPfoj66cGhH4mHZrw \
  --fctaddress FA3HZDE4MdXAthauFoA3aKYpx33U4fT2kAABmfwk7NBqyLT2zed5 \
@@ -113,7 +113,7 @@ A script named `update-coinbase-address.<short_id>.sh` is generated and avaible 
 ### To generate a script to update the efficiency
 
 ```bash
- node bin/factom-identity-cli update-efficiency --offline -s http://localhost:8088/v2 \
+ node bin/factom-identity-cli update-efficiency --offline -s https://api.factomd.net/v2 \
  --id 8888889822cf1d5889aa8dc11ad210b67d582812152de568fabc5f8505989c0f \
  --sk1 sk12tdaziBoFyBHG56Ery3bPFFBDpy7Y3VymduGPfoj66cGhH4mHZrw \
  --efficiency 50.1 \
@@ -127,7 +127,7 @@ Value of the _Server Management Subchain ID_ can be found by looking at the iden
 ### To generate a script to add a coinbase cancel message
 
 ```bash
- node bin/factom-identity-cli add-coinbase-cancel --offline -s http://localhost:8088/v2 \
+ node bin/factom-identity-cli add-coinbase-cancel --offline -s https://api.factomd.net/v2 \
  --id 8888889822cf1d5889aa8dc11ad210b67d582812152de568fabc5f8505989c0f \
  --sk1 sk12tdaziBoFyBHG56Ery3bPFFBDpy7Y3VymduGPfoj66cGhH4mHZrw \
  --height 39945 \
