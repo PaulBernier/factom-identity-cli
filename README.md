@@ -91,7 +91,7 @@ Use `--history` option.
 
 ## Offline mode
 
-You can use this tool to generate offline a bash script that can later be executed on a machine connected to the Internet (the scripts only require curl command to be installed). The use is mainly intended for Authority Servers operators who require maximum security. Your offline machine will need Node.js installed and this tool with all its dependencies available. You are strongly encouraged to audit the content of the generated scripts.
+You can use this tool to generate offline a bash script that can later be executed on a machine connected to the Internet (the scripts only require curl command to be installed). The use is mainly intended for Authority Servers operators who require maximum security. Your offline machine will need Node.js (>=8) installed and this tool with all its dependencies available. You are strongly encouraged to audit the content of the generated scripts.
 
 **Important: the scripts generated contain timestamped data. This has 2 consequences:**
 
