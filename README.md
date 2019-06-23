@@ -43,10 +43,10 @@ Use `--history` option.
 
 ```bash
  factom-identity-cli update-coinbase-address -s http://localhost:8088/v2 \
- --id 888888b2e7c7c63655fa85e0b0c43b4b036a6bede51d38964426f122f61c5584 \
- --sk1 sk12J1qQCjTRtnJ15bmb1iSinEvtzgQMBi5szzV793LUJQib36pvz \
- --fct FA24PAtyZWWVAPm95ZCVpwyY6RYHeCMTiZt2v4VQAY8aBXMUZyeF \
- --secaddress Es3ytEKt4R55M9juC4ks7EgxQSX8BpRnM4WADthFoq7j1WgbEEGW
+ --id 888888aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa \
+ --sk1 sk1XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
+ --fct FAXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
+ --secaddress EsXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ```
 
 ### Update efficiency
@@ -62,10 +62,10 @@ Use `--history` option.
 
 ```bash
  factom-identity-cli update-efficiency -s http://localhost:8088/v2 \
- --id 888888b2e7c7c63655fa85e0b0c43b4b036a6bede51d38964426f122f61c5584 \
- --sk1 sk12J1qQCjTRtnJ15bmb1iSinEvtzgQMBi5szzV793LUJQib36pvz \
+ --id 888888aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa \
+ --sk1 sk1XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
  --efficiency 19.89 \
- --secaddress Es3ytEKt4R55M9juC4ks7EgxQSX8BpRnM4WADthFoq7j1WgbEEGW
+ --secaddress EsXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ```
 
 ### Add a coinbase cancel message
@@ -82,11 +82,11 @@ Use `--history` option.
 
 ```bash
  factom-identity-cli add-coinbase-cancel -s http://localhost:8088/v2 \
- --id 888888b2e7c7c63655fa85e0b0c43b4b036a6bede51d38964426f122f61c5584 \
- --sk1 sk12J1qQCjTRtnJ15bmb1iSinEvtzgQMBi5szzV793LUJQib36pvz \
+ --id 888888aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa \
+ --sk1 sk1XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
  --height 39945 \
  --index 4 \
- --secaddress Es3ytEKt4R55M9juC4ks7EgxQSX8BpRnM4WADthFoq7j1WgbEEGW
+ --secaddress EsXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ```
 
 ## Offline mode
@@ -102,10 +102,10 @@ You can use this tool to generate offline a bash script that can later be execut
 
 ```bash
  node bin/factom-identity-cli update-coinbase-address --offline -s https://api.factomd.net/v2 \
- --id 8888889822cf1d5889aa8dc11ad210b67d582812152de568fabc5f8505989c0f \
- --sk1 sk12tdaziBoFyBHG56Ery3bPFFBDpy7Y3VymduGPfoj66cGhH4mHZrw \
- --fctaddress FA3HZDE4MdXAthauFoA3aKYpx33U4fT2kAABmfwk7NBqyLT2zed5 \
- --secaddress Es3ytEKt6t5Jm9juC4kR7EgKQSX8BpRnM4WADtgFoq7j1WgbeEGW
+ --id 888888aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa \
+ --sk1 sk1XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
+ --fctaddress FAXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
+ --secaddress EsXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ```
 
 A script named `update-coinbase-address.<short_id>.sh` is generated and avaible in the folder after successful execution (_short_id_ is the short id of your identity: the first 6 characters after the leading 888888).
@@ -114,11 +114,11 @@ A script named `update-coinbase-address.<short_id>.sh` is generated and avaible 
 
 ```bash
  node bin/factom-identity-cli update-efficiency --offline -s https://api.factomd.net/v2 \
- --id 8888889822cf1d5889aa8dc11ad210b67d582812152de568fabc5f8505989c0f \
- --sk1 sk12tdaziBoFyBHG56Ery3bPFFBDpy7Y3VymduGPfoj66cGhH4mHZrw \
+ --id 888888aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa \
+ --sk1 sk1XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
  --efficiency 50.1 \
- --secaddress Es3ytEKt6t5Jm9juC4kR7EgKQSX8BpRnM4WADtgFoq7j1WgbeEGW \
- --smchainid 8888887c01c12c72052f9c99b45782013feadb20c46ca86dc6e3a9730835848a
+ --secaddress EsXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
+ --smchainid 888888bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 ```
 
 A script named `update-efficiency.<short_id>.sh` is generated and avaible in the folder after successful execution (_short_id_ is the short id of your identity: the first 6 characters after the leading 888888).
@@ -128,12 +128,12 @@ Value of the _Server Management Subchain ID_ can be found by looking at the iden
 
 ```bash
  node bin/factom-identity-cli add-coinbase-cancel --offline -s https://api.factomd.net/v2 \
- --id 8888889822cf1d5889aa8dc11ad210b67d582812152de568fabc5f8505989c0f \
- --sk1 sk12tdaziBoFyBHG56Ery3bPFFBDpy7Y3VymduGPfoj66cGhH4mHZrw \
+ --id 888888aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa \
+ --sk1 sk1XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
  --height 39945 \
  --index 4 \
- --secaddress Es3ytEKt6t5Jm9juC4kR7EgKQSX8BpRnM4WADtgFoq7j1WgbeEGW \
- --smchainid 8888887c01c12c72052f9c99b45782013feadb20c46ca86dc6e3a9730835848a
+ --secaddress EsXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
+ --smchainid 888888bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 ```
 
 A script named `add-coinbase-cancel.<short_id>.sh` is generated and avaible in the folder after successful execution (_short_id_ is the short id of your identity: the first 6 characters after the leading 888888).

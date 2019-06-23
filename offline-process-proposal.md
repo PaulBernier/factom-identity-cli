@@ -56,19 +56,19 @@ In a terminal, with your own values:
 
 ```bash
  node bin/factom-identity-cli update-coinbase-address --offline -s https://api.factomd.net/v2 \
- --id 8888889822cf1d5889aa8dc11ad210b67d582812152de568fabc5f8505989c0f \
- --fctaddress FA3HZDE4MdXAthauFoA3aKYpx33U4fT2kAABmfwk7NBqyLT2zed5 \
- --sk1 sk12tdaziBoFyBHG56Ery3bPFFBDpy7Y3VymduGPfoj66cGhH4mHZrw \
- --secaddress Es3ytEKt6t5Jm9juC4kR7EgKQSX8BpRnM4WADtgFoq7j1WgbeEGW
+ --id 888888aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa \
+ --fctaddress FAXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
+ --sk1 sk1XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
+ --secaddress EsXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ```
 
 ```bash
   node bin/factom-identity-cli update-efficiency --offline -s https://api.factomd.net/v2 \
-  --id 8888889822cf1d5889aa8dc11ad210b67d582812152de568fabc5f8505989c0f \
+  --id 888888aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa \
   --efficiency 50.1 \
-  --sk1 sk12tdaziBoFyBHG56Ery3bPFFBDpy7Y3VymduGPfoj66cGhH4mHZrw \
-  --secaddress Es3ytEKt6t5Jm9juC4kR7EgKQSX8BpRnM4WADtgFoq7j1WgbeEGW \
-  --smchainid 8888887c01c12c72052f9c99b45782013feadb20c46ca86dc6e3a9730835848a
+  --sk1 sk1XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
+  --secaddress EsXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX \
+  --smchainid 888888bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 ```
 
 Those 2 commands will create 2 scripts if successful: `update-coinbase-address.<short_id>.sh` and `update-efficiency.<short_id>.sh` where _short_id_ is the short id of your identity (the first 6 characters after the leading 888888). You are invited to audit the content of those scripts. Copy those 2 scripts to your DATA stick.
