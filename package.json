@@ -29,14 +29,14 @@
     "homepage": "https://github.com/PaulBernier/factom-identity-cli#readme",
     "dependencies": {
         "chalk": "^2.4.2",
-        "factom": "^1.2.3",
-        "factom-identity-lib": "0.2.0-rc7",
+        "factom": "^1.2.5",
+        "factom-identity-lib": "0.2.0-rc8",
         "ora": "^3.4.0",
         "yargs": "^13.2.4"
     },
     "devDependencies": {
         "chai": "^4.2.0",
-        "eslint": "^5.16.0",
+        "eslint": "^6.0.1",
         "mocha": "^6.1.4",
         "nyc": "^14.1.1",
         "prettier": "^1.18.2"
