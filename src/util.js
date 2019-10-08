@@ -1,3 +1,5 @@
+const { URL } = require('url');
+
 function getConnectionInformation(endpoint) {
     const url = new URL(endpoint.includes('://') ? endpoint : `http://${endpoint}`);
     return {
